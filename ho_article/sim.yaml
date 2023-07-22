@@ -1,0 +1,51 @@
+config:
+    trace: gen/charger.trace
+    graph: gen/charger.svg
+    bb:
+        dump: gen/bb.json
+    max_ticks: 1000
+
+actions:
+    -
+        name: is_hazard_nearby
+        stub: random
+        params:
+            delay: 1000
+    -
+        name: stop_flag
+        stub: failure
+        params:
+            delay: 1000
+    -
+        name: battery_low
+        stub: success
+        params:
+            delay: 1000
+    -
+        name: on_target
+        stub: success
+        params:
+            delay: 1000
+    -
+        name: do_job
+        stub: success
+        params:
+            delay: 1000
+    -
+        name: wait
+        stub: success
+        params:
+            delay: 1000
+    -
+        name: move_to
+        stub: success
+        params:
+            delay: 1000
+    -
+        name: charge
+        stub: success
+        params:
+            delay: 1000
+    
+    
+ 
