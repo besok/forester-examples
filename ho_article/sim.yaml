@@ -1,5 +1,5 @@
 config:
-    trace: gen/charger.trace
+    trace: gen/charger.log
     graph: gen/charger.svg
     bb:
         dump: gen/bb.json

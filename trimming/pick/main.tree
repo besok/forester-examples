@@ -1,0 +1,36 @@
+import "std::actions"
+
+root main r_sequence {
+    move()
+    // just to have an infinite loop (reactive sequence helps here)
+    running()
+}
+
+// move is a simple def that works in the following way
+// try to pick(can get failed)
+// check if the attempt is failed then recover
+// check if the attempt is success then place it
+r_sequence move() {
+    // we can't predict the result of pick so we forces it to be success always
+    force_success pick()
+    recover()
+    place()
+}
+
+r_fallback recover(){
+     is_picked()
+     recover_impl()
+}
+r_fallback place(){
+     inverter is_picked()
+     place_impl()
+}
+
+// checks if something is picked
+impl is_picked();
+// returns the robot to the pickablep osition
+impl recover_impl();
+// attempts to pick (initial implementation)
+impl pick();
+// attempt to place to some nearest available location
+impl place_impl();

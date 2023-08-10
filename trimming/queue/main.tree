@@ -1,0 +1,22 @@
+// this is a simple representation of a queue of some tasks
+// the index is a shift from head.
+// The queue tries to execute the nearest task and if it fails goes to the next one etc
+root queue
+    repeat(10) r_fallback {
+        task(env(1), exec())
+        task(env(2), exec())
+        task(env(3), exec())
+        task(env(4), exec())
+        task(env(5), exec())
+    }
+// a task consists of
+// - a tree for prepare the envirounment, which can fail
+// - a task itself, which can fail also
+r_sequence task(prep:tree, action:tree){
+    prep(..)
+    action(..)
+}
+// just preparing some env, checking position, conditions etc
+impl env(idx:num);
+// executing some job
+impl exec();
