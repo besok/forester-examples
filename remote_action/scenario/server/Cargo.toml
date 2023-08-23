@@ -1,0 +1,15 @@
+[package]
+name = "forester-remote_action-example"
+description = "attachment to the article about remote actions"
+authors = ["BorisZhguchev <zhguchev@hotmail.com>"]
+version = "0.1.0"
+edition = "2021"
+homepage = "https://github.com/besok/forester-examples"
+repository = "https://github.com/besok/forester-examples"
+
+[dependencies]
+forester-rs = {path = "../../../../forester", version = "0.2.3"}
+log = "0.4"
+env_logger = "0.10.0"
+tokio = { version = "1.29.1", features = ["full"] }
+rand = "0.8.5"

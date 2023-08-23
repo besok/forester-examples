@@ -1,0 +1,32 @@
+import "std::actions"
+
+root main r_sequence {
+    if_else(
+        test = test("path_calculated"),
+        then = move_to("path","path_calculated"),
+        else = set_path()
+    )
+}
+
+r_sequence set_path {
+    if_else(
+        locked("path_guard"),
+        wait(),
+        calculate("path","path_calculated","path_guard")
+    )
+}
+
+impl move_to(path:string, flag:string);
+impl calculate(path:string, flag:string, guard:string);
+
+r_sequence if_else(test:tree, then:tree, else:tree){
+    r_fallback {
+        test (..)
+        else (..)
+    }
+    then (..)
+}
+
+r_sequence wait() {
+    running()
+}

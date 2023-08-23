@@ -26,8 +26,7 @@ class MyServer(BaseHTTPRequestHandler):
             content_length = int(self.headers["Content-Length"])
             # get body as json and deserialize it to RemoteActionRequest
             body = json.loads(self.rfile.read(content_length))
-            req = RemoteActionRequest(body["tick"], [RtArgument(arg["name"], arg["value"]) for arg in body["args"]],
-                                      body["serv_url"])
+            req = RemoteActionRequest.from_bytes(body.encode("utf-8"))
 
             client = ForesterHttpClient(req.serv_url)
             client.put("test", "test")
