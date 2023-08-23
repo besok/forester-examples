@@ -1,8 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from forester_http.client import *
 
-import requests
 from forester_http.client import *
 
 hostName = "localhost"
@@ -32,14 +30,10 @@ class MyServer(BaseHTTPRequestHandler):
                                       body["serv_url"])
 
             client = ForesterHttpClient(req.serv_url)
-            resp = client.put("test", "test")
+            client.put("test", "test")
 
-            print("Response: " + str(resp))
             self.send_response(200)
-
-            # send headers:
             self.send_header("Content-Type", "application/json;charset=UTF-8")
-
             self.end_headers()
 
             self.wfile.write(json.dumps("Success").encode("utf-8"))
