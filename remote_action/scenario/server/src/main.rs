@@ -1,7 +1,9 @@
+use forester_rs::runtime::action::builtin::remote::RemoteHttpAction;
 use forester_rs::runtime::action::keeper::ActionImpl;
-use forester_rs::runtime::action::Action;
-use forester_rs::runtime::args::RtArgs;
+use forester_rs::runtime::action::{Action, Impl, Tick};
+use forester_rs::runtime::args::{RtArgs, RtValue};
 use forester_rs::runtime::builder::ForesterBuilder;
+use forester_rs::runtime::context::TreeContextRef;
 use forester_rs::runtime::forester::Forester;
 use forester_rs::runtime::rtree::builder::RtTreeBuilder;
 use forester_rs::runtime::rtree::builder::*;
@@ -9,7 +11,7 @@ use forester_rs::runtime::rtree::rnode::FlowType;
 use forester_rs::runtime::rtree::rnode::{RNode, RNodeName};
 use forester_rs::runtime::trimmer::task::{RtTreeTrimTask, TrimTask};
 use forester_rs::runtime::trimmer::{RequestBody, TreeSnapshot, TrimRequest};
-use forester_rs::runtime::RtResult;
+use forester_rs::runtime::{RtResult, TickResult};
 use forester_rs::simulator::actions::SimAction;
 use forester_rs::tracer::{Event, Tracer, TracerConfig};
 use forester_rs::visualizer::Visualizer;
@@ -20,25 +22,34 @@ use std::path::PathBuf;
 extern crate log;
 
 fn main() {
-    turn_on_logs();
-
-    let mut root = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
-    let mut root = root.parent().unwrap().to_path_buf();
-    root.push("tree");
+    let mut root = root();
 
     let mut fb = forester_builder(&mut root);
 
-    let mut forester = fb.build_with(|| success()).unwrap();
+    fb.register_remote_action(
+        "calculate",
+        RemoteHttpAction::new("http://localhost:10000/calculate".to_string()),
+    );
+    fb.register_remote_action(
+        "move_to",
+        RemoteHttpAction::new("http://localhost:10001/move_to".to_string()),
+    );
 
-    vis(root.clone().join("main.svg"), &mut forester);
+    fb.http_serv(9000);
 
-    // println!("{:?}", forester.run_until(Some(10)));
-    //
-    // vis(root.clone().join("after.svg"), &mut forester);
+    let mut forester = fb.build().unwrap();
+
+    println!("{:?}", forester.run_until(Some(100)));
+    // vis(root.join("tree.svg"), &mut forester);
 }
 
-fn success() -> ActionImpl {
-    ActionImpl::Present(Action::Sync(Box::new(SimAction::Success(100))))
+fn root() -> PathBuf {
+    let mut r = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+        .parent()
+        .unwrap()
+        .to_path_buf();
+    r.push("tree");
+    r
 }
 
 fn vis(path: PathBuf, forester: &mut Forester) {
@@ -51,14 +62,6 @@ fn forester_builder(mut root: &mut PathBuf) -> ForesterBuilder {
     fb.root(root.clone());
     fb.tracer(tracer(&mut root));
     fb
-}
-
-fn turn_on_logs() {
-    env_logger::builder()
-        .is_test(true)
-        .filter_level(LevelFilter::max())
-        .try_init()
-        .unwrap();
 }
 
 fn tracer(mut root: &mut PathBuf) -> Tracer {

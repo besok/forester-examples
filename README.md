@@ -14,3 +14,7 @@ with a given [code](./ho_article) and described in the [article](https://medium.
 An example of using modifying the runtime tress during the execution process 
 with a given [code](./trimming) 
 and described in the [article](https://medium.com/@zhguchev/forester-part-iii-trimming-change-the-runtime-tree-on-the-fly-185a6e61a7aa)
+
+## Forester. Remote Actions are to the Rescue!
+An example of using remote actions in Forester with a given [code](./remote_action)
+and described in the [article](https://medium.com/@zhguchev/forester-remote-actions-are-to-the-rescue-b5819ca0f25a)
