@@ -37,6 +37,7 @@ async fn handler(Json(req): Json<RemoteActionRequest>) -> impl IntoResponse {
     let result = client
         .put("test".to_string(), json!({"f1":1, "f2":2, "f3":3}))
         .await;
+    let result2 = client.put("tt".to_string(), json!("OK")).await;
     println!("result of putting {:?}", result);
 
     let result = client
