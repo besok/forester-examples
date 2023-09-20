@@ -20,3 +20,5 @@ An example of using remote actions in Forester with a given [code](./remote_acti
 and described in the [article](https://medium.com/@zhguchev/forester-remote-actions-are-to-the-rescue-b5819ca0f25a)
 
 ## Forester. Export to ROS Nav2 BT
+How to export a tree to ROS Nav2 BT. The code is [here](./export_ros_nav) and the
+[article](https://medium.com/@zhguchev/forester-export-to-ros-nav2-84318dd017b2)
