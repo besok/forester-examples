@@ -1,0 +1,9 @@
+POST http://localhost:10000/action
+Content-Type: application/json
+
+{
+  "proceed": false,
+  "threshold": 50
+}
+
+###

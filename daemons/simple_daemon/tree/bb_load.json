@@ -1,0 +1,16 @@
+{
+  "storage": {
+    "proceed": {
+      "Unlocked": true
+    },
+    "threshold": {
+      "Unlocked": 50
+    },
+    "result": {
+      "Unlocked": 0
+    },
+    "stale": {
+      "Unlocked": true
+    }
+  }
+}

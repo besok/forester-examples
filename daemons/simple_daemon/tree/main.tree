@@ -1,0 +1,42 @@
+import "std::actions"
+
+impl add(q:num);
+impl sub(q:num);
+impl mul(q:num);
+
+root main inverter r_sequence {
+    not_stopped()
+    is_fresh()
+    handle_value()
+    set_not_fresh()
+}
+
+r_fallback not_stopped {
+    test(proceed)
+    sequence {
+        stop_daemon("http_watcher")
+        fail_empty()
+    }
+}
+r_fallback is_fresh(){
+    when(test(stale), running())
+    success()
+}
+r_fallback handle_value {
+    when(equal(threshold, 50),mul(0))
+    when(less(threshold, 50),add(5))
+    when(less(50, threshold),sub(5))
+}
+
+r_sequence set_not_fresh {
+    store("stale", true)
+    running()
+}
+
+r_sequence when(cond:tree, action:tree) {
+    cond(..)
+    action(..)
+}
+
+
+
