@@ -9,6 +9,10 @@ use log::LevelFilter;
 
 pub const R: &str = "result";
 
+pub fn r() -> String {
+    R.to_string()
+}
+
 pub fn builder(root: &PathBuf) -> ForesterBuilder {
     let mut fb = ForesterBuilder::from_fs();
     fb.main_file("main.tree".to_string());

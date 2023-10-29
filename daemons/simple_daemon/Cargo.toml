@@ -9,7 +9,7 @@ edition = "2021"
 
 
 [dependencies]
-forester-rs = { path = "../../../forester", version = "0.3.0" }
+forester-rs = "0.3.0"
 serde_json = { version = "1.0.99" }
 log = "0.4"
 env_logger = "0.10.0"

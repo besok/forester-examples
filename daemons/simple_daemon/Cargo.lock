@@ -345,6 +345,8 @@ checksum = "00b0228411908ca8685dba7fc2cdd70ec9990a6e753e89b6ac91a84c40fbaf4b"
 [[package]]
 name = "forester-rs"
 version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee7a2d8bac4086d63dbc57a504093720615f2815bcb1dc42b2b4ac61aaff6d96"
 dependencies = [
  "axum",
  "chrono",
