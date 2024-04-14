@@ -1,0 +1,12 @@
+[package]
+name = "example1dtext"
+description = "Examples to work with forester"
+authors = ["BorisZhguchev <zhguchev@hotmail.com>"]
+homepage = "https://github.com/besok/forester"
+repository = "https://github.com/besok/forester"
+version = "0.3.0"
+edition = "2021"
+license-file = "../LICENSE"
+
+[dependencies]
+forester-rs = "0.3.1"

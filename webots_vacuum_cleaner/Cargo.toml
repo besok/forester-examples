@@ -1,0 +1,18 @@
+[package]
+name = "webots-vacuum-cleaner"
+description = "Examples to work with forester"
+authors = ["BorisZhguchev <zhguchev@hotmail.com>"]
+homepage = "https://github.com/besok/forester"
+repository = "https://github.com/besok/forester"
+version = "0.3.0"
+edition = "2021"
+license-file = "../LICENSE"
+
+[dependencies]
+forester-rs = "0.3.1"
+forester-webots = "0.1.0"
+rand = "0.8.5"
+
+[[bin]]
+name = "create_avoid_obstacles"
+path = "src/main.rs"

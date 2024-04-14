@@ -1,0 +1,58 @@
+import "std::actions"
+
+root main sequence {
+    init()
+    retry(0) sequence {
+        step()
+        inverter moving()
+    }
+}
+
+sequence init {
+    store("wall","wall")
+    store("left","left")
+    store("right","right")
+    store("backward","backward")
+    store("forward","forward")
+    init_robot()
+    wait(0.5)
+}
+
+fallback moving() {
+    when_wall()
+    when_left_obstacle()
+    when_right_obstacle()
+    when_front_obstacle()
+    move("forward")
+}
+
+sequence when_wall {
+    collision(wall)
+    turn(3.14)
+}
+sequence when_left_obstacle {
+    collision(left)
+    move(backward)
+    wait(0.5)
+    turn(2.0)
+}
+sequence when_right_obstacle {
+    collision(right)
+    move(backward)
+    wait(0.5)
+    turn(-2.0)
+}
+sequence when_front_obstacle {
+    collision(front)
+    move(backward)
+    wait(0.5)
+    turn(-4.0)
+}
+
+
+impl init_robot();
+impl wait(sec:num);
+impl collision(target:string);
+impl turn(angle:num);
+impl move(target:string);
+impl step();

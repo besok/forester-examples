@@ -1,0 +1,57 @@
+// world: A  <--100--> B where A = 0 and B = 100
+// robot: r, load:l
+// 3 points => robot point and initial target point and final target point.
+// the goal is to take the load from initial target point into final target point
+// 1 - head off to the initial target
+//  -- select right direction
+//  -- keep moving until the distance will be 0
+// 2 - pick up the load
+// 3 - move to the final point
+//  -- select the right direction
+//  -- keep moving until the distance will be 0
+// 4 - place the load
+// bb:
+// init_coord: where the robot is spawned like 10
+// load_coord: where the load is spawned like 80
+// targ_coord: where the load should be delivered like 20
+// size: the size from A to B
+
+import "std::actions"
+
+root main sequence {
+    define_env(
+        size = 100,
+        init_coord = 10,
+        load_coord = 80,
+        targ_coord = 0
+    )
+    move_to(load_coord)
+    pick()
+    move_to(targ_coord)
+    place()
+}
+
+sequence define_env( size:num, init_coord:num, load_coord:num,targ_coord:num ){
+    store("size", size)
+    store("init_coord", init_coord)
+    store("curr_coord", init_coord)
+    store("direction", 0)
+    store("load_coord", load_coord)
+    store("targ_coord", targ_coord)
+}
+
+sequence move_to(target:num){
+    define_direction(target)
+    retry(size) {
+        fallback {
+            is_arrived(target)
+            inverter move()
+        }
+    }
+}
+
+impl define_direction(target:num);
+impl is_arrived(target:num);
+impl move();
+impl pick();
+impl place();
