@@ -36,3 +36,5 @@ and the [article](https://medium.com/@zhguchev/forester-just-a-warm-up-example-2
 ## A real example of simple robotic simulation using Webots and Forester on Rust.
 Today's example demonstrates how to implement a simple algorithm 
 for a robot vacuum cleaner using both Webots, Rust and Forester.
+the code is [here](webots_vacuum_cleaner/)
+the article is [here](https://medium.com/@zhguchev/a-real-example-of-simple-robotic-simulation-using-webots-forester-on-rust-35bfabdfb7f2)
