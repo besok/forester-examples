@@ -1,0 +1,1 @@
+/Users/boris.zhguchev/PetProjects/articles/webots_vacuum_cleaner/target/debug/create_avoid_obstacles: /Users/boris.zhguchev/PetProjects/articles/webots_vacuum_cleaner/src/actions.rs /Users/boris.zhguchev/PetProjects/articles/webots_vacuum_cleaner/src/main.rs /Users/boris.zhguchev/PetProjects/articles/webots_vacuum_cleaner/src/robot.rs

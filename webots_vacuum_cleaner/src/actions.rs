@@ -3,6 +3,7 @@ use forester_rs::runtime::args::RtArgs;
 use forester_rs::runtime::context::TreeContextRef;
 use forester_rs::runtime::{RuntimeError, TickResult};
 use forester_webots::wb_robot_init;
+use rand::Rng;
 use crate::robot::RobotRef;
 
 pub struct Init(pub RobotRef);
@@ -113,7 +114,18 @@ impl Impl for Turning {
             .and_then(|v| v.cast(ctx.clone()).float().ok())
             .flatten()
             .ok_or(RuntimeError::fail("angle is absent".to_owned()))?;
-
+        let with_rand =
+            args.find_or_ith("with_random".to_string(), 1)
+                .and_then(|v| v.as_bool())
+                .unwrap_or(false);
+        let angle = if with_rand {
+            let mut rng = rand::thread_rng();
+            let multi: f64 = rng.gen();
+            angle * multi
+        } else {
+            angle
+        };
+        println!("turning on {angle}");
         robot.turn(angle);
         Ok(TickResult::success())
     }
@@ -128,7 +140,7 @@ impl Impl for Waiting {
             .first()
             .and_then(|v| v.cast(ctx.clone()).float().ok())
             .flatten()
-            .ok_or(RuntimeError::fail("angle is absent".to_owned()))?;
+            .ok_or(RuntimeError::fail("wait is absent".to_owned()))?;
 
         robot.wait(wait);
         Ok(TickResult::success())
